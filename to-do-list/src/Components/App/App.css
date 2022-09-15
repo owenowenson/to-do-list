@@ -51,6 +51,7 @@ ul {
   margin-left: 10px;
   font-size: 15px;
   font-weight: bolder;
+  cursor: pointer;
   /* border: 1px solid black; */
 }
 
@@ -71,18 +72,31 @@ ul {
   font-size: 15px;
   font-weight: bolder;
   margin-left: 10px;
+  cursor: pointer;
   /* border: 1px solid black; */
 }
 
 .item .edit {
-  background-color: #282c34;
-  color: white;
+  background-color: whitesmoke;
+  color: black;
   border-radius: 5px;
-  border: none;
-  height: 25px;
+  border: 1px solid black;
+  height: 23px;
   font-size: 15px;
   font-weight: bolder;
   padding: 0px 15px;
   margin-left: 10px;
+  cursor: pointer;
   /* border: 1px solid black; */
+}
+
+li {
+  cursor: pointer;
+}
+
+.complete {
+  text-decoration: line-through;
+  text-decoration-color: rgba(0, 0, 0, 0.4);
+  text-decoration-thickness: 2px;
+  color: rgba(0, 0, 0, 0.4);
 }
