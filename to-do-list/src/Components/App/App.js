@@ -12,16 +12,18 @@ function App() {
   }
 
   function onEnter(e) {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && toDo.task.length > 0) {
       setList([...list, toDo]);
       setToDo({ ...toDo, task: "" });
     }
   }
 
   function onSubmit() {
-    setList([...list, toDo]);
-    setToDo({ ...toDo, task: "" });
+    if (toDo.task.length > 0) { 
+      setList([...list, toDo]);
+      setToDo({ ...toDo, task: "" });
     console.log(list);
+    }
   }
 
   return (
