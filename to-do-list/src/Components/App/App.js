@@ -1,30 +1,65 @@
 import React from "react";
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
-  const [toDo, setToDo] = useState({ task: "", completed: false });
+  const [toDo, setToDo] = useState({ task: "", date: "", completed: false });
   const [list, setList] = useState([]);
+  const [count, setCount] = useState(0);
 
   function onInput(e) {
     setToDo({ ...toDo, task: e.target.value });
-    console.log(toDo);
   }
 
   function onEnter(e) {
     if (e.key === "Enter" && toDo.task.length > 0) {
-      setList([...list, toDo]);
-      setToDo({ ...toDo, task: "" });
+      onSubmit();
     }
   }
 
   function onSubmit() {
-    if (toDo.task.length > 0) { 
+    const d = new Date();
+    // if (d.getMinutes() < 10) {
+    //   let date = d.getHours() + ":0" + d.getMinutes();
+    //   setToDo({ ...toDo, date: date });
+    //   console.log("Date updated: ", toDo);
+    // } else {
+    //   let date = d.getHours() + ":" + d.getMinutes();
+    //   setToDo({ ...toDo, date: date });
+    //   console.log("Date updated: ", toDo);
+    // }
+    let hours = "0" + d.getHours();
+    let mins = "0" + d.getMinutes();
+    let time = hours.slice(-2) + ":" + mins.slice(-2);
+    setToDo({ ...toDo, date: time });
+
+    if (toDo.task.length > 0) {
       setList([...list, toDo]);
       setToDo({ ...toDo, task: "" });
-    console.log(list);
+      console.log(list);
     }
   }
+
+  useEffect(() => {
+    // console.log("toDo", toDo);
+    console.log(count);
+    onSubmit();
+    const last = list.length - 1;
+    // console.log("list[last]", list[last]);
+    // if (list.length > 0 && list[last] !== toDo) {
+    //   setToDo({ ...toDo, task: list[last].task });
+    //   setList([...list.slice(0, last), { toDo }]);
+    // }
+    // if (list.length > 0 && list[last].date !== toDo.date) {
+    //   setList([...list.slice(0, last), { ...list[last], date: toDo.date }]);
+    // }
+    if (list.length > 0 && count < 2) {
+      setList([...list.slice(0, last), { ...list[last], date: toDo.date }]);
+      setCount(count + 1);
+    } else if (count === 2) {
+      setCount(0);
+    }
+  }, [list]);
 
   return (
     <div className="App">
@@ -77,6 +112,7 @@ function App() {
                 </li>
               )}
               <div className="buttons">
+                <span className="date">{item.date}</span>
                 <button
                   className="edit"
                   onClick={function () {
