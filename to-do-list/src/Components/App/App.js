@@ -90,6 +90,7 @@ function App() {
                       ...list.slice(index + 1),
                     ]);
                     console.log(selectedToDo);
+                    console.log('hi')
                   }}
                 >
                   {item.task}
