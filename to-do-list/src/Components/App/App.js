@@ -19,15 +19,6 @@ function App() {
 
   function onSubmit() {
     const d = new Date();
-    // if (d.getMinutes() < 10) {
-    //   let date = d.getHours() + ":0" + d.getMinutes();
-    //   setToDo({ ...toDo, date: date });
-    //   console.log("Date updated: ", toDo);
-    // } else {
-    //   let date = d.getHours() + ":" + d.getMinutes();
-    //   setToDo({ ...toDo, date: date });
-    //   console.log("Date updated: ", toDo);
-    // }
     let hours = "0" + d.getHours();
     let mins = "0" + d.getMinutes();
     let time = hours.slice(-2) + ":" + mins.slice(-2);
@@ -41,18 +32,9 @@ function App() {
   }
 
   useEffect(() => {
-    // console.log("toDo", toDo);
-    console.log(count);
     onSubmit();
+
     const last = list.length - 1;
-    // console.log("list[last]", list[last]);
-    // if (list.length > 0 && list[last] !== toDo) {
-    //   setToDo({ ...toDo, task: list[last].task });
-    //   setList([...list.slice(0, last), { toDo }]);
-    // }
-    // if (list.length > 0 && list[last].date !== toDo.date) {
-    //   setList([...list.slice(0, last), { ...list[last], date: toDo.date }]);
-    // }
     if (list.length > 0 && count < 2) {
       setList([...list.slice(0, last), { ...list[last], date: toDo.date }]);
       setCount(count + 1);
@@ -78,6 +60,7 @@ function App() {
                 <li
                   className="complete"
                   onClick={function () {
+                    setCount(2)
                     let selectedToDo = {
                       ...item,
                       completed: !list[index].completed,
@@ -96,6 +79,7 @@ function App() {
                 <li
                   className="incomplete"
                   onClick={function () {
+                    setCount(2)
                     let selectedToDo = {
                       ...item,
                       completed: !list[index].completed,
@@ -116,6 +100,7 @@ function App() {
                 <button
                   className="edit"
                   onClick={function () {
+                    setCount(2)
                     let editedToDo = prompt("Edit to-do:", item.task);
                     if (editedToDo !== null) {
                       editedToDo = { ...item, task: editedToDo };
